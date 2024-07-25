@@ -4,15 +4,15 @@ import secondImg from "../assets/images/secondImg.jpg";
 import thirdImg from "../assets/images/ThirdImg.jpg";
 import worldImg from "../assets/images/world.png";
 import experienceImg from "../assets/images/experience.png";
-import '../styles/home.css'
-import Subtitle from '../shared/subtitle'
+import '../styles/home.css';
+import Subtitle from '../shared/subtitle';
 import { Container, Row, Col } from "react-bootstrap";
 import SearchBar from "../shared/SearchBar";
 import ServiceList from "../services/ServiceList";
 import FeaturedTourList from "../wrappers/Featured tours/FeaturedTourList";
 import MasonryImagesGallery from "../wrappers/image-gallery/MasonryImagesGallery";
 import Newsletter from "../shared/Newsletter";
-import HomeFooter from '../wrappers/HomeFooter'
+import HomeFooter from '../wrappers/HomeFooter';
 
 const Home = () => {
   return (

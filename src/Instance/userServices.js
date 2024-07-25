@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+
 import { instance,protectedInstance } from "./instance";
 
 
@@ -34,6 +34,12 @@ export const userServices = {
        
         return await protectedInstance.post(`/review/${id}`,{
             reviewText , tourRating
+        })
+    },
+
+    createBooking: async(fullName,phone,guestSize,bookAt,totalAmount,id) => {
+        return await protectedInstance.post(`/bookings/checkout-session/${id}`,{
+            fullName,phone,guestSize,bookAt,totalAmount
         })
     }
 };

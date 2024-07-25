@@ -3,31 +3,58 @@ import "./booking.css";
 import { FaStar } from "react-icons/fa";
 import { RiCloseLine } from "react-icons/ri";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { userServices } from "../../Instance/userServices";
 
 const Booking = ({ tour, avgRating }) => {
+
+  const {id} = useParams();
   const { price, reviews } = tour;
+
   const navigate = useNavigate()
 
-  const [credentials,setCredentials]=useState({
-    userId : "01",
-    userEmail:"vijay@gmail.com",
-    fullName:"",
-    phone:'',
-    guestSize:1,
-    bookAt:""
-  })
+  // const [credentials,setCredentials]=useState({
+  //   userId : "01",
+  //   userEmail:"vijay@gmail.com",
+  //   fullName:"",
+  //   phone:'',
+  //   guestSize:1,
+  //   bookAt:""
+  // })
 
-  const handleChange =e=>{
-    setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
-  }
+  // const handleChange =e=>{
+  //   setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
+  // }
+
+  const [data, setData] = useState([]);
+  const [fullName,setFullName] = useState('')
+  const [guestSize,setGuestSize] = useState(1)
+  const [phone,setPhone] = useState('')
+  const [bookAt,setBookAt] = useState('')
+
   const serviceFee = 10
-  const totalAmount = Number(price) * Number(credentials.guestSize) + Number(serviceFee) ;
+  const totalAmount = Number(price) * Number(guestSize) + Number(serviceFee) ;
 
-  const handleClick = e=>{
-    e.preventDefault();
+  const handleClick = async() => {
+    try {
+      userServices.createBooking(fullName,phone,guestSize,bookAt,totalAmount,id)
+      .then((res)=>{
+        alert(res.data.message)
+        console.log(res.data)
+        setData(res.data)
+
+        if(data.session.url){
+          window.location.href = data.session.url
+        }
+
+      }).catch((err)=>{
+        alert(err.message)
+      })
+    } catch (error) {
+      alert(error.message)
+    }
     
-    navigate("/thank-you")
+    // navigate("/thank-you")
   }
 
   return (
@@ -48,17 +75,33 @@ const Booking = ({ tour, avgRating }) => {
           <Form className="booking__info-form" onSubmit={handleClick}> 
             <FormGroup>
               <input type="text" placeholder="Full Name" id="fullName"
-              required onChange={handleChange}/>
+              required 
+              // onChange={handleChange}
+              value={fullName}
+              onChange={(e)=> setFullName(e.target.value)}
+              />
             </FormGroup>
             <FormGroup>
               <input type="number" placeholder="Phone" id="phone"
-              required onChange={handleChange}/>
+              required 
+              // onChange={handleChange}
+              value={phone}
+              onChange={(e)=> setPhone(e.target.value)}
+              />
             </FormGroup>
             <FormGroup className="d-flex align-items-center gap-3">
               <input type="date" placeholder="" id="bookAt"
-              required onChange={handleChange}/>
+              required 
+              // onChange={handleChange}
+              value={bookAt}
+              onChange={(e)=> setBookAt(e.target.value)}
+              />
               <input type="number" placeholder="Guest" id="guestSize"
-              required onChange={handleChange}/>
+              required 
+              // onChange={handleChange}
+              value={guestSize}
+              onChange={(e)=> setGuestSize(e.target.value)}
+              />
             </FormGroup>
           </Form>
         </div>

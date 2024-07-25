@@ -16,7 +16,10 @@ import { Route, createBrowserRouter,createRoutesFromElements ,RouterProvider, Ro
 import { UserProvider } from "./context/ContextApi";
 import { useState } from "react";
 import { userServices } from "./Instance/userServices";
-import AdminLogin from "./Admin_component/AdminLogin";
+// import AdminLogin from "./Admin_component/AdminLogin";
+import CreateTour from "./Admin_component/CreateTour";
+import TourLists from "./Admin_component/TourLists";
+import EditTour from "./Admin_component/EditTour"
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -104,19 +107,21 @@ const App = () => {
    return (
     <>
 
-    
+    <HomeNav user={user} handleLogout={handleLogout}/>
     <Routes >
-    <Route path = "index" element= {<HomeNav user={user} handleLogout={handleLogout}/>} />
-    {/* <Route path = "/" element= {<Navigate to ="/home"/>} /> */}
-    <Route path = "home" element = {<Home/>}/>
+      
+    <Route path = "/" element= {<Navigate to ="/home"/>} />
+    <Route path = "/home" element = {<Home/>}/>
     
-    <Route path = "tours" element = {<Tours/>}/>
-    <Route path = "tours/:id" element = {<TourDetails user={user}/>}/>
-    <Route path = "login" element = {<Login handleClick={handleClick} email ={email}  setEmail={setEmail} password ={password} setPassword ={setPassword}/>}/>
-    <Route path = "register" element = {<Register/>}/>
-    <Route path = "thank-you" element = {<ThankYou/>}/>
-    <Route path = "tours/search" element = {<SearchResult/>}/>
-    <Route path = "admin/login" element={<AdminLogin/>}/>
+    <Route path = "/tours" element = {<Tours/>}/>
+    <Route path = "/tours/:id" element = {<TourDetails user={user}/>}/>
+    <Route path = "/login" element = {<Login handleClick={handleClick} email ={email}  setEmail={setEmail} password ={password} setPassword ={setPassword}/>}/>
+    <Route path = "/register" element = {<Register/>}/>
+    <Route path = "/checkout-success" element = {<ThankYou/>}/>
+    <Route path = "/tours/search" element = {<SearchResult/>}/>
+    <Route path = "/admin/createTour" element={<CreateTour />}/>
+    <Route path = "/admin/tourLists" element={<TourLists />}/>
+    <Route path = "/admin/editTour/:id" element={<EditTour />}/>
  </Routes>
 
 
