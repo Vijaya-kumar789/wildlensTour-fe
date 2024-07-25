@@ -9,57 +9,90 @@ import HomeFooter from '../wrappers/HomeFooter'
 import userContext from '../context/ContextApi';
 import { BASE_URL } from '../utils/config';
 import { AuthContext } from '../context/AuthContext';
+import { useFormik } from 'formik';
+// import { basicSchema } from './formikSchema';
 
+const Login = () => {
 
-const Login = (
-  // {handleClick,email , setEmail,password , setPassword}
-) => {
-
-  // const {handleClick,email , setEmail,password , setPassword} =useContext(userContext);
-    // const [email , setEmail] = useState("");
-    // const [password , setPassword] = useState("");
-
-    // const navigate = useNavigate()
-    const {dispatch} = useContext(AuthContext)
+  const {dispatch} = useContext(AuthContext)
   const navigate = useNavigate();
 
-  const [credentials,setCredentials]=useState({
-    email:undefined,
-    password:undefined
-  });
+  const onSubmit = async (e)=>{
+            
+            dispatch({type:'LOGIN_START'})
+            
+            try {
+              const res = await fetch (`${BASE_URL}/users/login`,{
+                method:'post',
+                headers:{
+                  'content-type' : 'application/json',
+                },
+                credentials:'include',
+                body: JSON.stringify(values),
+              }) 
 
-  const handleChange =e=>{
-    setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
-  };
+              const result = await res.json()
+              if(!res.ok) alert(result.message)
+                
+                if(res.ok){
+                dispatch({type:'LOGIN_SUCCESS', payload:result.data});
+              
+                navigate('/')
+                alert(result.message)
+                }
+            } catch (error) {
+              dispatch({ type : "LOGIN_FAILURE", payload: error.message})
+            }
 
-  const handleClick = async (e)=>{
-     e.preventDefault();
-     dispatch({type:'LOGIN_START'})
+          }
+  const { values,handleBlur,handleChange,errors,handleSubmit} = useFormik({
+    initialValues:{
+      email:'',
+      password:''
+    },
     
-    try {
-      const res = await fetch (`${BASE_URL}/users/login`,{
-        method:'post',
-        headers:{
-          'content-type' : 'application/json',
-        },
-        credentials:'include',
-        body: JSON.stringify(credentials),
-      }) 
+    onSubmit
+  })
+ 
+   console.log(errors)
 
-      const result = await res.json()
-      if(!res.ok) alert(result.message)
-        
-        if(res.ok){
-        dispatch({type:'LOGIN_SUCCESS', payload:result.data});
-       
-        navigate('/')
-        alert(result.message)
-        }
-    } catch (error) {
-      dispatch({ type : "LOGIN_FAILURE", payload: error.message})
-    }
+  // const [credentials,setCredentials]=useState({
+  //   email:undefined,
+  //   password:undefined
+  // });
 
-  }
+  // const handleChange =e=>{
+  //   setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
+  // };
+  
+          // const onSubmit = async (e)=>{
+          //   e.preventDefault();
+          //   dispatch({type:'LOGIN_START'})
+            
+          //   try {
+          //     const res = await fetch (`${BASE_URL}/users/login`,{
+          //       method:'post',
+          //       headers:{
+          //         'content-type' : 'application/json',
+          //       },
+          //       credentials:'include',
+          //       body: JSON.stringify(credentials),
+          //     }) 
+
+          //     const result = await res.json()
+          //     if(!res.ok) alert(result.message)
+                
+          //       if(res.ok){
+          //       dispatch({type:'LOGIN_SUCCESS', payload:result.data});
+              
+          //       navigate('/')
+          //       alert(result.message)
+          //       }
+          //   } catch (error) {
+          //     dispatch({ type : "LOGIN_FAILURE", payload: error.message})
+          //   }
+
+          // }
   // const handleClick = (e)=>{
   //   e.preventDefault();
     
@@ -92,16 +125,23 @@ const Login = (
                 <img src={userIcon} alt="" />
               </div>
               <h2>Login</h2>
-              <Form onSubmit={handleClick}>
+        
+              <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                      <input type="email" placeholder="Email" required id="email" 
-                      onChange={handleChange}
+                      <input type="email" placeholder="Email" required id="email"
+                      value={ values.email} 
+                      onChange={ handleChange}
+                      onBlur={ handleBlur}
+                      // onChange={handleChange}
                       // value={email} onChange={(e)=> setEmail(e.target.value)}
                       />
                 </FormGroup>
                 <FormGroup>
                       <input type="password" placeholder="Password" required id="password" 
-                      onChange={handleChange}
+                      value={ values.password} 
+                      onChange={ handleChange}
+                      onBlur={ handleBlur}
+                      // onChange={handleChange}
                       // value={password} onChange={(e)=> setPassword(e.target.value)}
                       
                       />
