@@ -5,7 +5,8 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { BrowserRouter } from 'react-router-dom'
-// import { AuthContextProvider } from './context/AuthContext.js'
+import { AuthContextProvider } from './context/AuthContext.jsx'
+
 // ReactDOM.createRoot(document.getElementById('root')).render(
 
 // <App />
@@ -15,10 +16,10 @@ import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <AuthContextProvider> */}
+    <AuthContextProvider>
     <BrowserRouter>
     <App />
     </BrowserRouter>
-    {/* </AuthContextProvider> */}
+    </AuthContextProvider>
   </React.StrictMode>,
 )

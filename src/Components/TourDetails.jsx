@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container, Row, Col, Form, ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import HomeFooter from '../wrappers/HomeFooter'
@@ -18,10 +18,13 @@ import Newsletter from "../shared/Newsletter";
 import useFetch from "../hooks/useFetch";
 import { BASE_URL } from "../utils/config";
 import { userServices } from "../Instance/userServices";
+import { AuthContext } from "../context/AuthContext";
 
 
-const TourDetails = ({user}) => {
+const TourDetails = () => {
   const { id } = useParams();
+
+  const {user} = useContext(AuthContext)
   const [reviewText,setReviewText] = useState("");
   // const reviewMsgRef = useRef("");
   const [tourRating, setTourRating] = useState(null);
@@ -49,7 +52,7 @@ const TourDetails = ({user}) => {
     e.preventDefault();
     // const reviewText = reviewMsgRef.current.value;
     console.log(reviewText)
-    if(!user || user===null){
+    if(!user || user===null || user===undefined){
       alert('Please Login')
     }else{
     try {
@@ -61,10 +64,12 @@ const TourDetails = ({user}) => {
           
         })
         .catch(err => {
-          alert(err.message)
+          console.log(err)
+          
         })
       } catch (error) {
         alert(error.message)
+       
     }
     
     }

@@ -14,6 +14,7 @@ import logoImg from "../assets/images/logo.png";
 import "./homeNav.css";
 import { userServices } from "../Instance/userServices";
 import userContext from "../context/ContextApi";
+import { AuthContext } from "../context/AuthContext";
 
 const nav_links = [
   {
@@ -58,8 +59,8 @@ const nav_links = [
 //     withCredentials:true,}
 // )
 
-const HomeNav = ({ user,handleLogout }) => {
- 
+const HomeNav = () => {
+  // { user,handleLogout }
   // const {userData} = useContext(userContext)
   // console.log(userData)
   // const [userData,setUserData] = useState({});
@@ -87,6 +88,27 @@ const HomeNav = ({ user,handleLogout }) => {
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const navigate = useNavigate()
+  const {user, dispatch} = useContext(AuthContext)
+
+  const logout =(e) => {
+    e.preventDefault();
+    dispatch({type:'LOGOUT'})
+    
+    userServices.logout().then(res => {
+      alert (res.data.message);
+
+      
+      setTimeout(() => {
+        navigate("/home")
+      },5000);
+  })
+  .catch(err => {
+    alert(err.message)
+  })
+
+}
+ 
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -139,7 +161,7 @@ const HomeNav = ({ user,handleLogout }) => {
                   {user? (
                     <>
                       <h5 className="mb-0">{user.userName}</h5>
-                      <Button className="btn btn-dark" onClick={handleLogout}>Logout</Button>
+                      <Button className="btn btn-dark" onClick={logout}>Logout</Button>
                     </>
                   ) : (
                     <>
