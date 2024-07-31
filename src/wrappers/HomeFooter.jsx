@@ -2,7 +2,7 @@ import React from 'react'
 import "./homefooter.css"
 import { Container, Row ,Col, ListGroup, ListGroupItem} from 'react-bootstrap'
 import logoImg from "../assets/images/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { RiYoutubeLine,RiFacebookCircleLine ,RiGithubFill,RiInstagramLine   } from "react-icons/ri";
 import { FiMapPin } from "react-icons/fi";
 import { MdOutlineMailOutline,MdPhone  } from "react-icons/md";
@@ -13,7 +13,7 @@ import { MdOutlineMailOutline,MdPhone  } from "react-icons/md";
       display: "Home",
     },
     {
-      path: "#",
+      path: "#about",
       display: "About",
     },
     {
@@ -43,6 +43,8 @@ const HomeFooter = () => {
   const year = new Date().getFullYear()
 
   return (
+    <>
+    <Outlet/>
    <footer className="footer" id='about'>
     <Container>
       <Row>
@@ -123,6 +125,7 @@ const HomeFooter = () => {
       </Row>
     </Container>
    </footer>
+   </>
   )
 }
 

@@ -7,6 +7,7 @@ import { GrGroup } from "react-icons/gr";
 import { BASE_URL } from "./../utils/config";
 
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SearchBar = () => {
   const locationRef = useRef("");
@@ -20,14 +21,14 @@ const SearchBar = () => {
     const maxGroupSize = maxGroupSizeRef.current.value;
 
     if (location === "" || distance === "" || maxGroupSize === "") {
-      return alert("All fields are required!");
+      return toast.warn("All fields are required!");
     }
 
     const res = await fetch(
       `${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
     );
 
-    if (!res.ok) alert("Something went wrong");
+    if (!res.ok) toast.error("Something went wrong");
 
     const result = await res.json();
     

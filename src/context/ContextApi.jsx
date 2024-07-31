@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userServices } from "../Instance/userServices";
+import { toast } from "react-toastify";
 
 
 const userContext = createContext({});
@@ -18,7 +19,7 @@ export const UserProvider =({Children}) => {
         
         userServices.login(email,password)
         .then(res => {
-          alert (res.data.message);
+          toast.success (res.data.message);
           
           setEmail('');
           setPassword('');
@@ -26,7 +27,7 @@ export const UserProvider =({Children}) => {
           navigate('/')
         })
         .catch(err => {
-          alert(err)
+          toast.error(err)
         })
     
       }

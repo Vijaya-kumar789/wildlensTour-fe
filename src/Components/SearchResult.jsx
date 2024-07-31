@@ -9,7 +9,7 @@ const SearchResult = () => {
   const location = useLocation();
   const [tours] = useState(location.state);
 
-  console.log(tours);
+ 
   return (
     <>
       <CommonSection title={"Tour Search Result"} />

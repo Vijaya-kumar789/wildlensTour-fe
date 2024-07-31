@@ -2,6 +2,10 @@ import { useState } from "react";
 import { adminServices } from "../Instance/adminServices";
 import './createTour.css'
 import { useNavigate } from "react-router-dom";
+import DashBoard from "./Dashboard";
+import { Container,Col,Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+
 
 const CreateTour = () => {
 
@@ -33,7 +37,7 @@ const CreateTour = () => {
         isAvailable
       )
       .then((res) => {
-        alert(res.data.message);
+        toast.success(res.data.message);
         setName("");
         setDescription("");
         setCity("");
@@ -46,15 +50,18 @@ const CreateTour = () => {
         navigate("/admin/tourLists")
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err);
       });
   };
   return (
     <>
+   
     <section >
-      <div className="container form ">
-        <div className="row g-3 mt-4">
-          <div className="col md-3">
+    <Container>
+      <Row className="row g-3 mt-4">
+       
+          <Col lg={12} md={8} sm={12}>
+          
             <div className="card ct-card">
               <h1 className="card-header d-flex justify-content-center py-5">
                 Create Tour
@@ -174,9 +181,10 @@ const CreateTour = () => {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          
+          </Col>
+        </Row>
+      </Container>
      </section>
     </>
   );

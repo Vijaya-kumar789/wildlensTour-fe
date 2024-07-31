@@ -10,15 +10,15 @@ const servicesData = [
     {
         imgUrl : weatherImg,
         title : "Calculate Weather",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, quisquam.",
+        desc: "Enjoy our tour in any weather; we provide flexible plans and cover for unexpected conditions.",
     },{
         imgUrl : guideImg,
         title : "Best Tour Guides",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, quisquam.",
+        desc: "Explore historic landmarks and hidden gems with our engaging guide, who brings each story to life.",
     },{
         imgUrl : customizationImg,
         title : "Customization",
-        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, quisquam.",
+        desc: "Tailor your tour to your interests with customized routes, activities, and schedules for a unique experience.",
     }
 ]
 

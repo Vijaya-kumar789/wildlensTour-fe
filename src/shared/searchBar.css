@@ -8,7 +8,7 @@
 
 .form__group span {
     font-size: 1.4rem;
-    color: #780B9F;
+    color: #135D66;
 }
 
 .form__group input{
@@ -33,7 +33,7 @@
 .search__icon {
     font-size: 1.3rem;
     padding: 0.5rem;
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: #fff;
     border-radius: 10px 5px 10px 5px;
     cursor: pointer;

@@ -8,10 +8,7 @@ import { UserProvider } from '../context/ContextApi'
 const Layout = () => {
   return (
     <>
-   
-    <HomeNav />
     <Routers/>
-   
     </>
   )
 }

@@ -16,6 +16,8 @@ import {
     RiMoneyDollarCircleFill,
     RiMapPinTimeLine,
   } from "react-icons/ri";
+import { toast } from "react-toastify";
+import { RiseLoader } from "react-spinners";
 
 
 const TourLists = () => {
@@ -24,25 +26,10 @@ const TourLists = () => {
   const [loading, setLoading] = useState(null);
   // const { _id, name, city, photo, price, isAvailable, reviews } = tours;
 
-  const handleDelete = async (id)=>
-    
-    { 
-        try {
-            adminServices.deleteTour(id)
-            .then((res)=>{
-             alert(res.data.message)
-             
-            }).catch((err)=>{
-                alert(err.message)
-            })
-        } catch (error) {
-            alert(error.message)
-        }
-        
  
-}
 
   useEffect(() => {
+   
     const fetchTour = async () => {
       setLoading(true);
 
@@ -54,7 +41,7 @@ const TourLists = () => {
             setLoading(false);
           })
           .catch((err) => {
-            alert(err.message);
+            toast.error(err.message);
           });
       } catch (error) {
         setError(error.message);
@@ -63,6 +50,24 @@ const TourLists = () => {
     };
     fetchTour();
   },[]);
+
+  const handleDelete = async (id)=>
+    
+    { 
+        try {
+            adminServices.deleteTour(id)
+            .then((res)=>{
+             toast.success(res.data.message)
+             if(res.ok){fetchTour();}
+            }).catch((err)=>{
+                toast.error(err.message)
+            })
+        } catch (error) {
+          toast.error(error.message)
+        }
+        
+ 
+}
 //   const id = tours._id
 
   
@@ -73,7 +78,7 @@ const TourLists = () => {
   return (
     <>
       <div className="container">
-        {loading && <h4 className="text-center pt-5">Loading.....</h4>}
+        {loading && <div className="text-center pt-5 mt-5"><RiseLoader color="#135D66" /></div>}
         {error && <h4 className="text-center">{error}</h4>}
         {!loading && !error && (
           <div className="row">

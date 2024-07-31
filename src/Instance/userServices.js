@@ -5,10 +5,10 @@ import { instance,protectedInstance } from "./instance";
 export const userServices = {
 
   
-    register: async (userName , email, password) => {
+    register: async (values) => {
         
         return await instance.post("/users/register",{
-            userName , email, password
+            data:{data},
         })
     },
 
@@ -41,5 +41,8 @@ export const userServices = {
         return await protectedInstance.post(`/bookings/checkout-session/${id}`,{
             fullName,phone,guestSize,bookAt,totalAmount
         })
+    },
+    getMyBookings: async () =>{
+        return await protectedInstance.get('/bookings/user')
     }
 };

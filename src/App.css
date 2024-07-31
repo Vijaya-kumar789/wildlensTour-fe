@@ -2,8 +2,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --primary-color: #780B9F;
-   --secondary-color:linear-gradient(to right top, #940ac6, #8d04b5, #8601a4, #7e0094, #750085, #7a0184, #7e0182, #820381, #95068b, #a90995, #bd0c9f, #d210a8);
+  /* --primary-color: #780B9F; #135D66 #0b619f */
+  --primary-color: #135D66;
+  --secondary-color:#135D66;
   --heading-color: #0b2727;
   --text-color: #6e7074;
   --font-name: "Montserrat", sans-serif;
@@ -42,7 +43,7 @@ ul {
 }
 
 .primary__btn {
-  background: var(--secondary-color) !important;
+  background: var(--primary-color) !important;
   border: none !important;
   border-radius: 50px !important;
   padding: 0.4rem 1.5rem !important;
@@ -74,7 +75,7 @@ ul {
 }
 
 .section__subtitle {
-  background: var(--secondary-color);
+  background: var(--primary-color);
   font-family: var(--subtitle-font-name);
   width: max-content;
   padding: 0px 0.5rem;
@@ -85,6 +86,14 @@ ul {
   font-size: 1.7rem;
   color: #fff;
 }
+
+.tab{
+  margin-top: 50px;
+  border: 1px solid #8e9194;
+ 
+  border-radius: 15px;
+}
+
 
 @media only screen and (max-width:992px){
   .primary__btn a, .secondary__btn a{

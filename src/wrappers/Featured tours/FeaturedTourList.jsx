@@ -4,6 +4,7 @@ import { Col } from "react-bootstrap";
 
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
+import { RiseLoader } from "react-spinners";
 
 const FeaturedTourList = () => {
 
@@ -13,7 +14,7 @@ const FeaturedTourList = () => {
 
   return (
     <>{
-      loading && <h4>Loading.......</h4>
+      loading && <div className="text-center pt-5 mt-5"><RiseLoader color="#135D66" /></div>
     }
     {
       error && <h4>{error}</h4>

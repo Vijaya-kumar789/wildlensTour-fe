@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
     <section>
-      <Container >
+      <Container lg={12} >
         <Row >
           <Col lg={6} >
             <div className="hero__content">
@@ -88,21 +88,20 @@ const Home = () => {
       <div className="experience__content">
         <Subtitle subtitle={"Experience"}/>
         <h2>with our all Experience <br /> we will serve you</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-         In magni repellat officiis at atque consectetur placeat nostrum dolorum. Vitae, aliquam.</p>
+        <p> Discover exceptional travel experiences with personalized itineraries, expert local guides, and smooth logistics, crafted to make every moment immersive, stress-free, and uniquely memorable for you</p>
       </div>
       
       <div className="counter__wrapper d-flex align-item-center gap-5">
         <div className="counter__box">
-          <span>12k+</span>
+          <span>10k+</span>
           <h6>Successful Trip</h6>
         </div>
         <div className="counter__box">
-          <span>2k+</span>
+          <span>3k+</span>
           <h6>Regular Clints</h6>
         </div>
         <div className="counter__box">
-          <span>10</span>
+          <span>5</span>
           <h6>Years of experience</h6>
         </div>
       </div>

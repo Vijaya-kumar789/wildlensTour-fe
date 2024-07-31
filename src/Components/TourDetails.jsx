@@ -19,6 +19,8 @@ import useFetch from "../hooks/useFetch";
 import { BASE_URL } from "../utils/config";
 import { userServices } from "../Instance/userServices";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import { RiseLoader } from "react-spinners";
 
 
 const TourDetails = () => {
@@ -51,24 +53,24 @@ const TourDetails = () => {
   const submitHandle = (e) => {
     e.preventDefault();
     // const reviewText = reviewMsgRef.current.value;
-    console.log(reviewText)
+  
     if(!user || user===null || user===undefined){
-      alert('Please Login')
+      toast.error('Please Login')
     }else{
     try {
 
         userServices.addReview(reviewText , tourRating,id)
         .then(res =>{
-          alert(res.data.message);
+          toast.success(res.data.message);
           setReviewText("")
           
         })
         .catch(err => {
-          console.log(err)
+          toast.error(err.message)
           
         })
       } catch (error) {
-        alert(error.message)
+        toast.error(error.message)
        
     }
     
@@ -84,7 +86,7 @@ const TourDetails = () => {
       <section>
         <Container>
           {
-            loading && <h4 className="text-center pt-4">Loading.....</h4>
+            loading && <div className="text-center pt-5 mt-5"><RiseLoader color="#135D66" /></div>
           }
           {
             error && <h4 className="text-center pt-4">{error}</h4>
@@ -167,6 +169,7 @@ const TourDetails = () => {
                       <button
                         className="btn primary__btn text-white"
                         type="submit"
+                        onSubmit={submitHandle}
                       >
                         Submit
                       </button>

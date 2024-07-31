@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './createTour.css'
 import { adminServices } from '../Instance/adminServices';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const EditTour = () => {
 
@@ -23,7 +24,7 @@ const EditTour = () => {
           setIsAvailable(res.data.isAvailable);
             // alert(res.data.message)
             })
-        .catch((err)=>{alert(err)});
+        .catch((err)=>{toast.error(err.message)});
     },[id])
    
     const [name, setName] = useState("");
@@ -52,7 +53,7 @@ const EditTour = () => {
           isAvailable,id
         )
         .then((res) => {
-          alert(res.data.message);
+          toast.success(res.data.message);
           setName("");
           setDescription("");
           setCity("");
@@ -64,7 +65,7 @@ const EditTour = () => {
           setIsAvailable("");
         })
         .catch((err) => {
-          alert(err);
+          toast.error(err.message);
         });
     };
   return (

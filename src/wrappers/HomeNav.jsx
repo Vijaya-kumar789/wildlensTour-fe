@@ -1,20 +1,21 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Row } from "react-bootstrap";
+import {  Row } from "react-bootstrap";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { IoMenuSharp } from "react-icons/io5";
 import {
-  Link,
-  NavLink,
+  
   Outlet,
-  useLoaderData,
   useNavigate,
 } from "react-router-dom";
 import logoImg from "../assets/images/logo.png";
 import "./homeNav.css";
 import { userServices } from "../Instance/userServices";
-import userContext from "../context/ContextApi";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
+import { HashLink as Link  } from "react-router-hash-link";
 
 const nav_links = [
   {
@@ -22,7 +23,7 @@ const nav_links = [
     display: "Home",
   },
   {
-    path: "#",
+    path: "#about",
     display: "About",
   },
   {
@@ -31,60 +32,8 @@ const nav_links = [
   },
 ];
 
-// export const userLoader = async ()=>{
-//   try {
-//     const user = await userServices.getCurrentUser();
-
-//   if(!user){
-//     console.log("user not found")
-//   }else{{user}}
-//    ;
-//   } catch (error) {
-//     console.log(error.message)
-//   }
-
-// }
-
-// export const userLoader = async ()=>{
-//   const res = await fetch("http://localhost:3005/api/v1/users/profile")
-
-//   const user = await res.json()
-//   return {user}
-
-// }
-// const res = await fetch("http://localhost:3005/api/v1/users/profile",
-//  { headers:{
-//     'Content-Type' : "application/json",
-//    },
-//     withCredentials:true,}
-// )
-
 const HomeNav = () => {
-  // { user,handleLogout }
-  // const {userData} = useContext(userContext)
-  // console.log(userData)
-  // const [userData,setUserData] = useState({});
-
-  // const getUserData = async() =>{
-  //   try {
-
-  //   const user = await userServices.getCurrentUser();
-
-  //     setUserData(user.data);
-
-  //   } catch (error) {
-  //     console.log(error.message)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getUserData()
-  // },[setUserData])
-  // console.log(userData)
-  // console.log(userData.userName)
-
-  // const {user} = useLoaderData();
-  // console.log(user.data.userName)
+  
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
@@ -92,11 +41,11 @@ const HomeNav = () => {
   const {user, dispatch} = useContext(AuthContext)
 
   const logout =(e) => {
-    e.preventDefault();
+   
     dispatch({type:'LOGOUT'})
     
     userServices.logout().then(res => {
-      alert (res.data.message);
+      toast.success(res.data.message);
 
       
       setTimeout(() => {
@@ -104,7 +53,7 @@ const HomeNav = () => {
       },5000);
   })
   .catch(err => {
-    alert(err.message)
+    toast.error(err.message)
   })
 
 }
@@ -144,16 +93,41 @@ const HomeNav = () => {
                 <ul className="menu d-flex align-items-center gap-5">
                   {nav_links.map((item, index) => (
                     <li className="nav__item" key={index}>
-                      <NavLink
+                      <Link 
                         to={item.path}
-                        className={(navClass) =>
-                          navClass.isActive ? "active__link" : ""
-                        }
+                        // className={(navClass) =>
+                        //   navClass.isActive ? "active__link" : ""
+                        // }                     
                       >
                         {item.display}
-                      </NavLink>
+                      </Link>
+                     
                     </li>
+                    
                   ))}
+                   {user && user.role=="user"? (<li className="nav__item">
+                      <Link 
+                        to="/myBookings"
+                        // className={(navClass) =>
+                        //   navClass.isActive ? "active__link" : ""
+                        // }
+                    
+                      >
+                       My Booking
+                      </Link>
+                     
+                    </li>):user && user.role=="admin"? ( <Dropdown as={ButtonGroup}>
+      <Button  size="sm"
+             id="nav-dropdown">Dashboard</Button>
+
+      <Dropdown.Toggle split variant="secondary" id="dropdown-split-basic" />
+
+      <Dropdown.Menu >
+        <Dropdown.Item href="/admin/createTour">Create Tour</Dropdown.Item>
+        <Dropdown.Item href="/admin/tourLists">Edit Tour</Dropdown.Item>
+        <Dropdown.Item href="/admin/bookings">Bookings</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>):('')}
                 </ul>
               </div>
               <div className="nav__right d-flex align-items-center gap-4">
@@ -161,7 +135,7 @@ const HomeNav = () => {
                   {user? (
                     <>
                       <h5 className="mb-0">{user.userName}</h5>
-                      <Button className="btn btn-dark" onClick={logout}>Logout</Button>
+                      <Button className="btn primary__btn" onClick={logout}>Logout</Button>
                     </>
                   ) : (
                     <>

@@ -10,18 +10,21 @@ import userContext from '../context/ContextApi';
 import { BASE_URL } from '../utils/config';
 import { AuthContext } from '../context/AuthContext';
 import { useFormik } from 'formik';
-// import { basicSchema } from './formikSchema';
+import { loginSchema } from '../formikSchema/schema';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
   const {dispatch} = useContext(AuthContext)
   const navigate = useNavigate();
 
-  const onSubmit = async (e)=>{
-            
+  
+  const onSubmit = async (values,actions)=>{
+    
             dispatch({type:'LOGIN_START'})
             
             try {
+            
               const res = await fetch (`${BASE_URL}/users/login`,{
                 method:'post',
                 headers:{
@@ -32,83 +35,31 @@ const Login = () => {
               }) 
 
               const result = await res.json()
-              if(!res.ok) alert(result.message)
-                
+              if(!res.ok) toast.error(result.message)
+
                 if(res.ok){
                 dispatch({type:'LOGIN_SUCCESS', payload:result.data});
-              
+                actions.resetForm()
+                
+          
                 navigate('/')
-                alert(result.message)
+                toast.success(result.message)
+                
                 }
             } catch (error) {
               dispatch({ type : "LOGIN_FAILURE", payload: error.message})
             }
 
           }
-  const { values,handleBlur,handleChange,errors,handleSubmit} = useFormik({
+  const { values,handleBlur,handleChange,touched,errors,handleSubmit} = useFormik({
     initialValues:{
       email:'',
       password:''
     },
-    
+    validationSchema:loginSchema,
     onSubmit
   })
- 
-   console.log(errors)
 
-  // const [credentials,setCredentials]=useState({
-  //   email:undefined,
-  //   password:undefined
-  // });
-
-  // const handleChange =e=>{
-  //   setCredentials(prev=>({...prev,[e.target.id]:e.target.value}))
-  // };
-  
-          // const onSubmit = async (e)=>{
-          //   e.preventDefault();
-          //   dispatch({type:'LOGIN_START'})
-            
-          //   try {
-          //     const res = await fetch (`${BASE_URL}/users/login`,{
-          //       method:'post',
-          //       headers:{
-          //         'content-type' : 'application/json',
-          //       },
-          //       credentials:'include',
-          //       body: JSON.stringify(credentials),
-          //     }) 
-
-          //     const result = await res.json()
-          //     if(!res.ok) alert(result.message)
-                
-          //       if(res.ok){
-          //       dispatch({type:'LOGIN_SUCCESS', payload:result.data});
-              
-          //       navigate('/')
-          //       alert(result.message)
-          //       }
-          //   } catch (error) {
-          //     dispatch({ type : "LOGIN_FAILURE", payload: error.message})
-          //   }
-
-          // }
-  // const handleClick = (e)=>{
-  //   e.preventDefault();
-    
-  //   userServices.login(email,password)
-  //   .then(res => {
-  //     alert (res.data.message);
-      
-  //     setEmail('');
-  //     setPassword('');
-  //     navigate('/')
-  //   })
-  //   .catch(err => {
-  //     alert(err)
-  //   })
-
-  // }
 
   return (
     <>
@@ -132,25 +83,32 @@ const Login = () => {
                       value={ values.email} 
                       onChange={ handleChange}
                       onBlur={ handleBlur}
+                      className={errors.email && touched.email ? 'input-error':""}
                       // onChange={handleChange}
                       // value={email} onChange={(e)=> setEmail(e.target.value)}
                       />
+                      {errors.email && touched.email && <p className='error'>{errors.email}</p>}
                 </FormGroup>
                 <FormGroup>
                       <input type="password" placeholder="Password" required id="password" 
                       value={ values.password} 
                       onChange={ handleChange}
                       onBlur={ handleBlur}
+                      className={errors.password && touched.password ? 'input-error':""}
                       // onChange={handleChange}
                       // value={password} onChange={(e)=> setPassword(e.target.value)}
                       
                       />
+                      {errors.password && touched.password && <p className='error'>{errors.password}</p>}
                 </FormGroup>
                 <Button className = "btn  auth__btn " type="submit">Login</Button>
+                
               </Form>
               <p>Don't have an account? <Link to= "/register">Create</Link></p>
             </div>
+           
           </div>
+          
           </Col>
        </Row>
        </Container>

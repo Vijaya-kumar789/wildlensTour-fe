@@ -9,6 +9,7 @@ import HomeFooter from '../wrappers/HomeFooter'
 import { Container, Row, Col } from "react-bootstrap";
 import useFetch from '../hooks/useFetch'
 import { BASE_URL } from "../utils/config";
+import { RiseLoader } from "react-spinners";
 
 
 
@@ -23,6 +24,7 @@ const Tours = () => {
     const pages = Math.ceil(tourCount / 8)
     setPageCount(pages)
     window.scrollTo(0,0);
+
   },[page,tourCount,tours])
 
   return (
@@ -38,7 +40,7 @@ const Tours = () => {
       <section className="pt-0">
         <Container>
           {
-            loading && <h4 className="text-center pt-5">Loading.....</h4>
+            loading && <div className="text-center pt-5 mt-5"><RiseLoader color="#135D66" /></div>
           }
           {
             error && <h4 className="text-center">{error}</h4>

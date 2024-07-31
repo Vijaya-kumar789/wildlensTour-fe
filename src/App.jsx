@@ -45,89 +45,98 @@ import EditTour from "./Admin_component/EditTour"
 
 // export default App
 
-const App = () => {
+// const App = () => {
 
-  const [email , setEmail] = useState("");
-    const [password , setPassword] = useState("");
-    const [user,setUser] = useState(null);
-    const [isLogin,setIsLogin] = useState(false);
+//   const [email , setEmail] = useState("");
+//     const [password , setPassword] = useState("");
+//     const [user,setUser] = useState(null);
+//     const [isLogin,setIsLogin] = useState(false);
 
-    const navigate = useNavigate()
+//     const navigate = useNavigate()
 
-    const handleClick = (e)=>{
-        e.preventDefault();
+//     const handleClick = (e)=>{
+//         e.preventDefault();
         
-        userServices.login(email,password)
-        .then(res => {
-          alert (res.data.message);
+//         userServices.login(email,password)
+//         .then(res => {
+//           alert (res.data.message);
           
-          setEmail('');
-          setPassword('');
+//           setEmail('');
+//           setPassword('');
          
-            getUserData()
+//             getUserData()
          
-          setIsLogin(true)
-          navigate('/')
-        })
-        .catch(err => {
-          alert(err.message)
-        })
+//           setIsLogin(true)
+//           navigate('/')
+//         })
+//         .catch(err => {
+//           alert(err.message)
+//         })
     
-      }
+//       }
 
-    const handleLogout =(e) => {
-      e.preventDefault();
-      userServices.logout().then(res => {
-        alert (res.data.message);
+//     const handleLogout =(e) => {
+//       e.preventDefault();
+//       userServices.logout().then(res => {
+//         alert (res.data.message);
 
-        setUser(null)
-        setTimeout(() => {
-          navigate("/home")
-        },5000);
-    })
-    .catch(err => {
-      alert(err.message)
-    })
+//         setUser(null)
+//         setTimeout(() => {
+//           navigate("/home")
+//         },5000);
+//     })
+//     .catch(err => {
+//       alert(err.message)
+//     })
 
-  }
-  const getUserData = async() =>{
-    try {
+//   }
+//   const getUserData = async() =>{
+//     try {
     
-    const user = await userServices.getCurrentUser();
+//     const user = await userServices.getCurrentUser();
    
-      setUser(user.data);
+//       setUser(user.data);
      
       
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-  // console.log(user.userName)
+//     } catch (error) {
+//       console.log(error.message)
+//     }
+//   }
+//   // console.log(user.userName)
 
-   return (
-    <>
+//    return (
+//     <>
 
-    <HomeNav user={user} handleLogout={handleLogout}/>
-    <Routes >
+//     <HomeNav user={user} handleLogout={handleLogout}/>
+//     <Routes >
       
-    <Route path = "/" element= {<Navigate to ="/home"/>} />
-    <Route path = "/home" element = {<Home/>}/>
+//     <Route path = "/" element= {<Navigate to ="/home"/>} />
+//     <Route path = "/home" element = {<Home/>}/>
     
-    <Route path = "/tours" element = {<Tours/>}/>
-    <Route path = "/tours/:id" element = {<TourDetails user={user}/>}/>
-    <Route path = "/login" element = {<Login handleClick={handleClick} email ={email}  setEmail={setEmail} password ={password} setPassword ={setPassword}/>}/>
-    <Route path = "/register" element = {<Register/>}/>
-    <Route path = "/checkout-success" element = {<ThankYou/>}/>
-    <Route path = "/tours/search" element = {<SearchResult/>}/>
-    <Route path = "/admin/createTour" element={<CreateTour />}/>
-    <Route path = "/admin/tourLists" element={<TourLists />}/>
-    <Route path = "/admin/editTour/:id" element={<EditTour />}/>
- </Routes>
+//     <Route path = "/tours" element = {<Tours/>}/>
+//     <Route path = "/tours/:id" element = {<TourDetails user={user}/>}/>
+//     <Route path = "/login" element = {<Login handleClick={handleClick} email ={email}  setEmail={setEmail} password ={password} setPassword ={setPassword}/>}/>
+//     <Route path = "/register" element = {<Register/>}/>
+//     <Route path = "/checkout-success" element = {<ThankYou/>}/>
+//     <Route path = "/tours/search" element = {<SearchResult/>}/>
+//     <Route path = "/admin/createTour" element={<CreateTour />}/>
+//     <Route path = "/admin/tourLists" element={<TourLists />}/>
+//     <Route path = "/admin/editTour/:id" element={<EditTour />}/>
+//  </Routes>
 
 
-   </>
+//    </>
    
-   )
- }
+//    )
+//  }
   
+
+ const App = () => {
+
+  return (
+    <>
+    <Layout/>
+    </>
+  )
+}
   export default App
