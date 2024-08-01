@@ -1,9 +1,9 @@
 import axios from "axios";
 import { REACT_APP_API_URL } from "../utils/config";
 
-
+const baseURL = REACT_APP_API_URL
      const instance = axios.create({
-      REACT_APP_API_URL,
+      baseURL,
    timeout:5000,
    
    headers:{
@@ -14,7 +14,7 @@ import { REACT_APP_API_URL } from "../utils/config";
 });
 
    const protectedInstance = axios.create({
-      REACT_APP_API_URL,
+      baseURL,
     timeout:5000,
     headers:{
      'Content-Type' : "application/json",
