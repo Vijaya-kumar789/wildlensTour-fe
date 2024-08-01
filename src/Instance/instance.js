@@ -1,10 +1,8 @@
 import axios from "axios";
-
-
-const baseURL = 'https://wildlens-tour-be-i8b8.onrender.com/api/v1';
+import { BASE_URL } from "../utils/config";
 
      const instance = axios.create({
-   baseURL,
+      BASE_URL,
    timeout:5000,
    
    headers:{
@@ -15,7 +13,7 @@ const baseURL = 'https://wildlens-tour-be-i8b8.onrender.com/api/v1';
 });
 
    const protectedInstance = axios.create({
-    baseURL,
+      BASE_URL,
     timeout:5000,
     headers:{
      'Content-Type' : "application/json",
