@@ -1,2 +1,2 @@
-import env from "react-dotenv";
-export const BASE_URL = process.env.BASE_URL
+export const REACT_APP_API_URL = import.meta.env.REACT_APP_API_URL
+

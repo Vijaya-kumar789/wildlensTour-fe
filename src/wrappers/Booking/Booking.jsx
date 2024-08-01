@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { bookingSchema } from "../../formikSchema/schema";
 import { useFormik } from "formik";
-import { BASE_URL } from "../../utils/config";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 import { userServices } from "../../Instance/userServices";

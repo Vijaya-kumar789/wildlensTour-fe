@@ -16,7 +16,7 @@ import avatar from "../assets/images/avatar.jpg";
 import Booking from "../wrappers/Booking/Booking";
 import Newsletter from "../shared/Newsletter";
 import useFetch from "../hooks/useFetch";
-import { BASE_URL } from "../utils/config";
+import { REACT_APP_API_URL } from "../utils/config";
 import { userServices } from "../Instance/userServices";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
@@ -30,7 +30,7 @@ const TourDetails = () => {
   const [reviewText,setReviewText] = useState("");
   const [tourRating, setTourRating] = useState(null);
 
- const {tour : tours,loading,error} = useFetch(`${BASE_URL}/tours/${id}`)
+ const {tour : tours,loading,error} = useFetch(`${REACT_APP_API_URL}/tours/${id}`)
 
 
   const {

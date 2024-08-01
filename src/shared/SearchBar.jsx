@@ -4,7 +4,7 @@ import { Col, Form, FormGroup } from "react-bootstrap";
 import { FiMapPin } from "react-icons/fi";
 import { RiMapPinTimeLine, RiSearchLine } from "react-icons/ri";
 import { GrGroup } from "react-icons/gr";
-import { BASE_URL } from "./../utils/config";
+import { REACT_APP_API_URL } from "./../utils/config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ const SearchBar = () => {
     }
 
     const res = await fetch(
-      `${BASE_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
+      `${REACT_APP_API_URL}/tours/search/getTourBySearch?city=${location}&distance=${distance}&maxGroupSize=${maxGroupSize}`
     );
 
     if (!res.ok) toast.error("Something went wrong");

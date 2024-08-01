@@ -5,7 +5,6 @@ import loginImg from "../assets/images/login.jpg";
 import userIcon from "../assets/images/user.png";
 import {Link, useNavigate} from "react-router-dom"
 import HomeFooter from '../wrappers/HomeFooter'
-import { BASE_URL } from '../utils/config';
 import { AuthContext } from '../context/AuthContext';
 import { useFormik } from 'formik';
 import { loginSchema } from '../formikSchema/schema';

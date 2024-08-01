@@ -7,15 +7,15 @@ import Newsletter from "../shared/Newsletter";
 import HomeFooter from '../wrappers/HomeFooter'
 import { Container, Row, Col } from "react-bootstrap";
 import useFetch from '../hooks/useFetch'
-import { BASE_URL } from "../utils/config";
+import { REACT_APP_API_URL } from "../utils/config";
 import { RiseLoader } from "react-spinners";
 
 const Tours = () => {
 
   const [pageCount , setPageCount] = useState(0)
   const [page,setPage]= useState(0);
-  const {tour : tours,loading,error} = useFetch(`${BASE_URL}/tours?page=${page}`)
-  const {tour:tourCount} = useFetch(`${BASE_URL}/tours/search/getTourCount`)
+  const {tour : tours,loading,error} = useFetch(`${REACT_APP_API_URL}/tours?page=${page}`)
+  const {tour:tourCount} = useFetch(`${REACT_APP_API_URL}/tours/search/getTourCount`)
  
   useEffect(()=>{
     const pages = Math.ceil(tourCount / 8)
