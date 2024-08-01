@@ -1,1 +1,2 @@
-export const BASE_URL = 'https://wildlens-tour-be-i8b8.onrender.com/api/v1'
+import env from "react-dotenv";
+export const BASE_URL = process.env.BASE_URL
