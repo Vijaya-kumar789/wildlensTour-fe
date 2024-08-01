@@ -1,4 +1,4 @@
-// import { object, string, number, date, InferType } from 'yup';
+
 import * as Yup from 'yup';
 
 const passwordRules= /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;

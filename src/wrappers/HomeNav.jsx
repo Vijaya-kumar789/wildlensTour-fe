@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {  Row } from "react-bootstrap";
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import { IoMenuSharp } from "react-icons/io5";
 import {
-  
   Outlet,
   useNavigate,
 } from "react-router-dom";
@@ -34,7 +33,6 @@ const nav_links = [
 
 const HomeNav = () => {
   
-
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const navigate = useNavigate()
@@ -47,10 +45,8 @@ const HomeNav = () => {
     userServices.logout().then(res => {
       toast.success(res.data.message);
 
-      
-      setTimeout(() => {
-        navigate("/home")
-      },5000);
+      navigate("/home")
+     
   })
   .catch(err => {
     toast.error(err.message)
@@ -76,7 +72,7 @@ const HomeNav = () => {
 
     return window.removeEventListener("scroll", stickyHeaderFunc);
   });
-
+  const userName =user && user.userName.toUpperCase();
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
   return (
@@ -94,11 +90,7 @@ const HomeNav = () => {
                   {nav_links.map((item, index) => (
                     <li className="nav__item" key={index}>
                       <Link 
-                        to={item.path}
-                        // className={(navClass) =>
-                        //   navClass.isActive ? "active__link" : ""
-                        // }                     
-                      >
+                        to={item.path}  >
                         {item.display}
                       </Link>
                      
@@ -107,12 +99,7 @@ const HomeNav = () => {
                   ))}
                    {user && user.role=="user"? (<li className="nav__item">
                       <Link 
-                        to="/myBookings"
-                        // className={(navClass) =>
-                        //   navClass.isActive ? "active__link" : ""
-                        // }
-                    
-                      >
+                        to="/myBookings" >
                        My Booking
                       </Link>
                      
@@ -133,8 +120,10 @@ const HomeNav = () => {
               <div className="nav__right d-flex align-items-center gap-4">
                 <div className="nav__btns d-flex align-items-center gap-4">
                   {user? (
+                  
                     <>
-                      <h5 className="mb-0">{user.userName}</h5>
+                    
+                      <h5 className="mb-0">{userName}</h5>
                       <Button className="btn primary__btn" onClick={logout}>Logout</Button>
                     </>
                   ) : (

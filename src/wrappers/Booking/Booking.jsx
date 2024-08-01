@@ -2,64 +2,61 @@ import { Button, Form, FormGroup, ListGroup } from "react-bootstrap";
 import "./booking.css";
 import { FaStar } from "react-icons/fa";
 import { RiCloseLine } from "react-icons/ri";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { userServices } from "../../Instance/userServices";
 import { bookingSchema } from "../../formikSchema/schema";
 import { useFormik } from "formik";
 import { BASE_URL } from "../../utils/config";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
+import { userServices } from "../../Instance/userServices";
 
 const Booking = ({ tour, avgRating }) => {
   const { id } = useParams();
   const { price, reviews } = tour;
   const {user} = useContext(AuthContext)
 
-  const navigate = useNavigate();
-
-
   const onSubmit = async () => {
     if(!user || user===null || user===undefined){
       toast.error('Please Login')
     }else{
     try {
-      const res = await fetch(`${BASE_URL}/bookings/checkout-session/${id}`, {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(values),
-      });
-      
-      const result = await res.json();
-      if (!res.ok) toast.error(result.message);
 
-      if (result.session.url) {
+      userServices.createBooking(values,id)
+      .then(res=>{
+        console.log(res.data.session.url)
         toast.success("Redirecting to Checkout page")
-        window.location.href = result.session.url;
-      }
-      // userServices.createBooking(fullName,phone,guestSize,bookAt,totalAmount,id)
-      // .then((res)=>{
-      //   alert(res.data.message)
-      //   console.log(res.data)
-      //   setData(res.data)
-
-      // if(data.session.url){
-      //   window.location.href = data.session.url
-      // }
-
-      // }).catch((err)=>{
-      //   alert(err.message)
-      // })
+                window.location.href = res.data.session.url;
+      })
+      .catch(err => {
+        toast.error(err)
+        console.log(err)
+      })
     } catch (error) {
       toast.error(error.message);
     }
+  }}
+//       const res = await fetch(`${BASE_URL}/bookings/checkout-session/${id}`, {
+//         method: "post",
+//         headers: {
+//           "content-type": "application/json",
+//         },
+//         credentials: "include",
+//         body: JSON.stringify(values),
+//       });
+      
+//       const result = await res.json();
+//       if (!res.ok) toast.error(result.message);
 
-    // navigate("/thank-you")
-  }
-};
+//       if (result.session.url) {
+//         toast.success("Redirecting to Checkout page")
+//         window.location.href = result.session.url;
+//       }
+//     } catch (error) {
+//       toast.error(error.message);
+//     }
+//   }
+// };
   const { values, handleBlur, handleChange, touched, errors, handleSubmit } =
     useFormik({
       initialValues: {
@@ -103,14 +100,12 @@ const Booking = ({ tour, avgRating }) => {
               placeholder="Full Name"
               id="fullName"
               required
-              // onChange={handleChange}
               value={values.fullName}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
                 errors.fullName && touched.fullName ? "input-error" : ""
               }
-              // onChange={(e)=> setFullName(e.target.value)}
             />
             {errors.fullName && touched.fullName && <p className='error-msg'>{errors.fullName}</p>}
           </FormGroup>
@@ -120,13 +115,10 @@ const Booking = ({ tour, avgRating }) => {
               placeholder="Phone"
               id="phone"
               required
-              // onChange={handleChange}
               value={values.phone}
               onChange={handleChange}
               onBlur={handleBlur}
               className={errors.phone && touched.phone ? "input-error" : ""}
-
-              // onChange={(e)=> setPhone(e.target.value)}
             />
             {errors.phone && touched.phone && <p className='error-msg'>{errors.phone}</p>}
 
@@ -137,12 +129,10 @@ const Booking = ({ tour, avgRating }) => {
               placeholder=""
               id="bookAt"
               required
-              // onChange={handleChange}
               value={values.bookAt}
               onChange={handleChange}
               onBlur={handleBlur}
               className={errors.bookAt && touched.bookAt ? "input-error" : ""}
-              // onChange={(e)=> setBookAt(e.target.value)}
             />
             {errors.bookAt && touched.bookAt && <p className='error-msg'>{errors.bookAt}</p>}
             </FormGroup>
@@ -152,16 +142,12 @@ const Booking = ({ tour, avgRating }) => {
               placeholder="Guest"
               id="guestSize"
               required
-              // onChange={handleChange}
               value={values.guestSize}
               onChange={handleChange}
               onBlur={handleBlur}
               className={
                 errors.guestSize && touched.guestSize ? "input-error" : ""
-              }
-
-              // onChange={(e)=> setGuestSize(e.target.value)}
-            />
+              } />
             {errors.guestSize && touched.guestSize && <p className='error-msg'>{errors.guestSize}</p>}
 
           </FormGroup>

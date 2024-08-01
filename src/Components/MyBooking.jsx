@@ -70,8 +70,6 @@ const MyBooking = () => {
                      <div className="text-center mt-3 b-card">
                        <span>Booking Date :  </span>{booking_date}
                        </div>
-                      
-                     
                    </CardBody>
                  </Card>
                  </div>

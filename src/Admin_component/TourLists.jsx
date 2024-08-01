@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './tourList.css'
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../utils/config";
-import useFetch from "../hooks/useFetch";
 import { Card, CardBody } from "react-bootstrap";
 import { FiMapPin } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
 import calculateAvgRating from "../utils/avgRating";
 import { adminServices } from "../Instance/adminServices";
 import { GrGroup } from "react-icons/gr";
-
 import {
     RiMapPinUserFill,
     RiMapPin2Line,
@@ -24,10 +21,7 @@ const TourLists = () => {
   const [tours, setTours] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
-  // const { _id, name, city, photo, price, isAvailable, reviews } = tours;
-
  
-
   useEffect(() => {
    
     const fetchTour = async () => {
@@ -68,10 +62,6 @@ const TourLists = () => {
         
  
 }
-//   const id = tours._id
-
-  
-  //   const {tour : tours,loading,error} = useFetch(`${BASE_URL}/tours`)
 
   const { totalRating, avgRating } = calculateAvgRating(tours.reviews);
 

@@ -9,6 +9,7 @@
     margin-bottom: 1rem;
 
 }
+
 .footer .logo img{
     width: 200px;
 }
@@ -23,10 +24,12 @@
     color: var(--heading-color);
     font-size: 1.2rem;
 }
+
 .footer__link-title{
     color: var(--heading-color);
     margin-bottom: 1rem;
 }
+
 .footer__quick-links  a{
     text-decoration: none;
     color: var(--text-color);

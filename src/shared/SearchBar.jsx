@@ -5,7 +5,6 @@ import { FiMapPin } from "react-icons/fi";
 import { RiMapPinTimeLine, RiSearchLine } from "react-icons/ri";
 import { GrGroup } from "react-icons/gr";
 import { BASE_URL } from "./../utils/config";
-
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 

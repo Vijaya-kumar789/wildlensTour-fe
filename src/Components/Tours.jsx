@@ -5,13 +5,10 @@ import TourCard from "../shared/TourCard";
 import SearchBar from "../shared/SearchBar";
 import Newsletter from "../shared/Newsletter";
 import HomeFooter from '../wrappers/HomeFooter'
-
 import { Container, Row, Col } from "react-bootstrap";
 import useFetch from '../hooks/useFetch'
 import { BASE_URL } from "../utils/config";
 import { RiseLoader } from "react-spinners";
-
-
 
 const Tours = () => {
 

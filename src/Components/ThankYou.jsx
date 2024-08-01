@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container,Row,Col, Button } from 'react-bootstrap'
 import '../styles/thankyou.css'
 import { RiCheckboxCircleLine } from "react-icons/ri";
@@ -15,7 +14,7 @@ const ThankYou = () => {
                     <div className="thank__you">
                         <span><RiCheckboxCircleLine /></span>
                         <h1 className="mb-3 fw-semibold">Thank You</h1>
-                        <h3 className="mb-4">your tour is booked.</h3>
+                        <h3 className="mb-4">Your tour is booked Successfully.</h3>
 
                         <Button className="btn primary__btn w-25"><Link to = "/home">Back to Home</Link></Button>
                     </div>

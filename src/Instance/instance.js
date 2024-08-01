@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const baseURL = 'http://localhost:3005/api/v1';
+const baseURL = 'https://wildlens-tour-be-i8b8.onrender.com/api/v1';
 
      const instance = axios.create({
    baseURL,

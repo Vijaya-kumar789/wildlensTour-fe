@@ -7,23 +7,17 @@ export const userServices = {
   
     register: async (values) => {
         
-        return await instance.post("/users/register",{
-            data:{data},
-        })
+        return await instance.post("/users/register", values
+        )
     },
 
-    login: async ( email, password) => {
+    login: async (values) => {
         
-        return await instance.post("/users/login",{
-            email, password
-        },{
+        return await instance.post("/users/login",
+            values,{
             withCredentials:true
         }
     )
-    },
-
-    getCurrentUser : async () =>{
-        return await protectedInstance.get('/users/profile')
     },
 
     logout : async() => {
@@ -37,11 +31,11 @@ export const userServices = {
         })
     },
 
-    createBooking: async(fullName,phone,guestSize,bookAt,totalAmount,id) => {
-        return await protectedInstance.post(`/bookings/checkout-session/${id}`,{
-            fullName,phone,guestSize,bookAt,totalAmount
-        })
+    createBooking: async(values,id) => {
+        return await protectedInstance.post(`/bookings/checkout-session/${id}`,
+            values )
     },
+
     getMyBookings: async () =>{
         return await protectedInstance.get('/bookings/user')
     }

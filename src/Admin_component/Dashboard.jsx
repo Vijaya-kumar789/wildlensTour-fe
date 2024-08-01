@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -7,13 +7,11 @@ import {
   Link,
   NavLink,
   Outlet,
-  useLoaderData,
   useNavigate,
 } from "react-router-dom";
 import logoImg from "../assets/images/logo.png";
 import "../wrappers/homeNav.css";
 import { userServices } from "../Instance/userServices";
-import userContext from "../context/ContextApi";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
@@ -76,7 +74,7 @@ const DashBoard = () => {
       });
 
       const toggleMenu = () => menuRef.current.classNameList.toggle("show__menu");
-//   const [active, setActive] = useState("Dashboard");
+
   return (
       <>
         <header className="header" ref={headerRef}>
@@ -131,29 +129,7 @@ const DashBoard = () => {
       </>
        );
     };
-    // <>
-      {/* <div className="card" style={{ width: "18rem" ,height:"200px"}}>
-        <div className="card-header">Featured</div>
-        <ul className="list-group list-group-flush d-flex align-items-center ul" >
-          {nav_links.map((item, index) => (
-            <li className="nav__item" key={index}>
-              <Link to={item.path}>{item.display}</Link>
-            </li>
-          ))}
-        </ul>
-      </div> */}
-                        {/* <div className="list-group">
-                        {
-                            nav_links.map((item, index) => (
-                                <Link key={index} to={item.path} className={`list-group-item list-group-item-action ${active === item ? "active" : ""}`}
-                                    onClick={() => setActive(item.display)}
-                                >
-                                    {item.display}
-                                </Link>
-                            ))
-                    }
-                    </div> */}
-    // </>
+   
  
 
 export default DashBoard;

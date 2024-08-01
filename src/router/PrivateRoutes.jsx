@@ -7,8 +7,6 @@ const PrivateRoutes = () => {
 
     const {user} = useContext(AuthContext);
    
-//  user.role == 'admin'? <Outlet/> : user.role == 'user'?  <Navigate to = "/home"/> : <Navigate to = "/login"/> 
-  
     if(user && user.role == 'user'){
        
         return <Navigate to = "/home"/>
@@ -18,7 +16,6 @@ const PrivateRoutes = () => {
     } else{
       return <Outlet/> 
     }
-  
 }
 
 export default PrivateRoutes

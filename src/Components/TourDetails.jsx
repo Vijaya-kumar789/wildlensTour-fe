@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Form, ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import HomeFooter from '../wrappers/HomeFooter'
@@ -28,7 +28,6 @@ const TourDetails = () => {
 
   const {user} = useContext(AuthContext)
   const [reviewText,setReviewText] = useState("");
-  // const reviewMsgRef = useRef("");
   const [tourRating, setTourRating] = useState(null);
 
  const {tour : tours,loading,error} = useFetch(`${BASE_URL}/tours/${id}`)
@@ -52,8 +51,7 @@ const TourDetails = () => {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    // const reviewText = reviewMsgRef.current.value;
-  
+
     if(!user || user===null || user===undefined){
       toast.error('Please Login')
     }else{
@@ -160,7 +158,6 @@ const TourDetails = () => {
                     <div className="review__input">
                       <input
                         type="text"
-                        // ref={reviewMsgRef}
                         placeholder="share your thoughts"
                         required
                         value={reviewText}

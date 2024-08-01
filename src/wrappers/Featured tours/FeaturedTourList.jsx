@@ -1,7 +1,5 @@
 import TourCard from "../../shared/TourCard";
 import { Col } from "react-bootstrap";
-
-
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 import { RiseLoader } from "react-spinners";
@@ -9,8 +7,6 @@ import { RiseLoader } from "react-spinners";
 const FeaturedTourList = () => {
 
   const {tour : featuredTours ,loading , error} = useFetch(`${BASE_URL}/tours/search/getAvailableTour`);
-
-
 
   return (
     <>{

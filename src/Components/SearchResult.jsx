@@ -5,11 +5,12 @@ import TourCard from "../shared/TourCard";
 import { useLocation } from "react-router-dom";
 import Newsletter from "../shared/Newsletter";
 import HomeFooter from '../wrappers/HomeFooter'
+
 const SearchResult = () => {
+
   const location = useLocation();
   const [tours] = useState(location.state);
 
- 
   return (
     <>
       <CommonSection title={"Tour Search Result"} />

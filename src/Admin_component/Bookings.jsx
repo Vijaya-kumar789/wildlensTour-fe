@@ -82,8 +82,7 @@ const Bookings = () => {
               <td>Otto</td>
               <td>@mdo</td>
               <td>@mdo</td>
-            {/* </tr> */}
-         
+           
         </table>
       
       </Container>
