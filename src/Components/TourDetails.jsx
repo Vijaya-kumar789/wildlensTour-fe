@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import {
   RiMapPinUserFill,
   RiMapPin2Line,
-  RiMoneyDollarCircleFill,
+  RiMoneyRupeeCircleFill ,
   RiMapPinTimeLine,
 } from "react-icons/ri";
 import { GrGroup } from "react-icons/gr";
@@ -119,7 +119,7 @@ const TourDetails = () => {
                       {city}
                     </span>
                     <span>
-                      <RiMoneyDollarCircleFill />${price}/per person
+                      <RiMoneyRupeeCircleFill  />₹{price}/per person
                     </span>
                     <span>
                       <RiMapPinTimeLine />

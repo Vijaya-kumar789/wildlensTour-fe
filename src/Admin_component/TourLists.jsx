@@ -10,7 +10,7 @@ import { GrGroup } from "react-icons/gr";
 import {
     RiMapPinUserFill,
     RiMapPin2Line,
-    RiMoneyDollarCircleFill,
+    RiMoneyRupeeCircleFill ,
     RiMapPinTimeLine,
   } from "react-icons/ri";
 import { toast } from "react-toastify";
@@ -106,7 +106,7 @@ const TourLists = () => {
                       {tour.city}
                     </span>
                     <span>
-                      <RiMoneyDollarCircleFill />${tour.price}/per person
+                      <RiMoneyRupeeCircleFill  />₹{tour.price}/per person
                     </span>
                     <span>
                       <RiMapPinTimeLine />

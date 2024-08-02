@@ -35,27 +35,7 @@ const Booking = ({ tour, avgRating }) => {
       toast.error(error.message);
     }
   }}
-//       const res = await fetch(`${BASE_URL}/bookings/checkout-session/${id}`, {
-//         method: "post",
-//         headers: {
-//           "content-type": "application/json",
-//         },
-//         credentials: "include",
-//         body: JSON.stringify(values),
-//       });
-      
-//       const result = await res.json();
-//       if (!res.ok) toast.error(result.message);
-
-//       if (result.session.url) {
-//         toast.success("Redirecting to Checkout page")
-//         window.location.href = result.session.url;
-//       }
-//     } catch (error) {
-//       toast.error(error.message);
-//     }
-//   }
-// };
+  
   const { values, handleBlur, handleChange, touched, errors, handleSubmit } =
     useFormik({
       initialValues: {
@@ -70,17 +50,17 @@ const Booking = ({ tour, avgRating }) => {
     });
     let companionFee=0;
     if(values.companion==true) {
-      companionFee = 20;
+      companionFee = 6000;
     }
     
-    const serviceFee = 10;
+    const serviceFee = 240;
     const totalAmount = Number(price) * Number(values.guestSize) + Number(serviceFee) + Number(companionFee);
     
   return (
     <div className="booking">
       <div className="booking__top d-flex align-items-center justify-content-between">
         <h3>
-          ${price} <span>/per Person</span>
+        ₹{price} <span>/per Person</span>
         </h3>
         <span className="rating d-flex align-items-center  ">
           <span>
@@ -170,24 +150,24 @@ const Booking = ({ tour, avgRating }) => {
         <ListGroup>
           <li className="border-0 px-0 li">
             <h5 className="d-flex align-items-center gap-1">
-              ${price} <RiCloseLine /> 1 person
+            ₹{price} <RiCloseLine /> 1 person
             </h5>
-            <span>${price}</span>
+            <span>₹{price}</span>
           </li>
 
         {values.companion == true? <li className="border-0 px-0 li">
         <h5>Companion Charge</h5>
-        <span>${companionFee}</span>
+        <span>₹{companionFee}</span>
       </li> : "" }
 
           <li className="border-0 px-0 li">
             <h5>Service Charge</h5>
-            <span>${serviceFee}</span>
+            <span>₹{serviceFee}</span>
           </li>
 
           <li className="border-0 px-0 total li">
             <h5>Total</h5>
-            <span>${totalAmount}</span>
+            <span>₹{totalAmount}</span>
           </li>
 
         
