@@ -31,7 +31,7 @@ const TourDetails = () => {
   const [tourRating, setTourRating] = useState(null);
 
  const {tour : tours,loading,error} = useFetch(`${REACT_APP_API_URL}/tours/${id}`)
-
+// const {tour : tours,loading,error} = useFetch(`http://localhost:3005/api/v1/tours/${id}`)
 
   const {
     photo,

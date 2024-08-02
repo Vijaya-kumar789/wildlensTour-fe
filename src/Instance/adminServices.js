@@ -1,4 +1,4 @@
-import { instance,protectedInstance } from "./instance";
+import { protectedInstance } from "./instance";
 
 
 export const adminServices = {
