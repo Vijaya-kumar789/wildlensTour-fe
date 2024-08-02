@@ -1,7 +1,6 @@
 import axios from "axios";
 import { REACT_APP_API_URL } from "../utils/config";
 
-console.log(REACT_APP_API_URL)
 const baseURL = REACT_APP_API_URL
 
      const instance = axios.create({
