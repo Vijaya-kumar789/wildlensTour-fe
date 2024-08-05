@@ -14,7 +14,7 @@ import "./homeNav.css";
 import { userServices } from "../Instance/userServices";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
-import { Link as NavLink  } from "react-scroll";
+import { HashLink as Link  } from "react-router-hash-link";
 
 const nav_links = [
   {
@@ -22,7 +22,7 @@ const nav_links = [
     display: "Home",
   },
   {
-    path: "about",
+    path: "#about",
     display: "About",
   },
   {
@@ -89,23 +89,19 @@ const HomeNav = () => {
                 <ul className="menu d-flex align-items-center gap-5">
                   {nav_links.map((item, index) => (
                     <li className="nav__item" key={index}>
-                      <NavLink 
-                        to={item.path} className={(navclassName) =>
-                          navclassName.isActive ? "active__link" : ""
-                        } >
+                      <Link 
+                        to={item.path}  >
                         {item.display}
-                      </NavLink>
+                      </Link>
                      
                     </li>
                     
                   ))}
                    {user && user.role=="user"? (<li className="nav__item">
-                      <NavLink 
-                        to="/myBookings" className={(navclassName) =>
-                          navclassName.isActive ? "active__link" : ""
-                        }>
+                      <Link 
+                        to="/myBookings" >
                        My Booking
-                      </NavLink>
+                      </Link>
                      
                     </li>):user && user.role=="admin"? ( <Dropdown as={ButtonGroup}>
       <Button  size="sm"
