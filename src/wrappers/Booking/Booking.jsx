@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 import { userServices } from "../../Instance/userServices";
+import Stripe from "stripe";
 
 const Booking = ({ tour, avgRating }) => {
   const { id } = useParams();
@@ -23,9 +24,10 @@ const Booking = ({ tour, avgRating }) => {
 
       userServices.createBooking(values,id)
       .then(res=>{
-        console.log(res.data.session.url)
-        toast.success("Redirecting to Checkout page")
-                window.location.href = res.data.session.url;
+       const sessionId = res.data
+        toast.success("Redirecting to Checkout page"),
+        stripe.redirectToCheckout({ sessionId: sessionId.id })
+                // window.location.href = res.data.session.url;
       })
       .catch(err => {
         toast.error(err)
@@ -35,7 +37,7 @@ const Booking = ({ tour, avgRating }) => {
       toast.error(error.message);
     }
   }}
-  
+
   const { values, handleBlur, handleChange, touched, errors, handleSubmit } =
     useFormik({
       initialValues: {
