@@ -12,7 +12,7 @@ const EditTour = () => {
 
     useEffect(()=>{
         adminServices.getTourById(id)
-        .then((res)=>{
+        .then((res)=>{  
             setName(res.data.name);
           setDescription(res.data.description);
           setCity(res.data.city);

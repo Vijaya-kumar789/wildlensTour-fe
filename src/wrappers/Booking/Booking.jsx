@@ -9,7 +9,8 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../context/AuthContext";
 import { userServices } from "../../Instance/userServices";
-import stripe from "stripe";
+import { REACT_APP_STRIPE_PUBLIC_KEY } from "../../utils/config";
+import { loadStripe } from '@stripe/stripe-js';
 
 const Booking = ({ tour, avgRating }) => {
   const { id } = useParams();
@@ -20,21 +21,36 @@ const Booking = ({ tour, avgRating }) => {
     if(!user || user===null || user===undefined){
       toast.error('Please Login')
     }else{
-    try {
-
-      userServices.createBooking(values,id)
-      .then(res=>{
-       const sessionId = res.data
-        toast.success("Redirecting to Checkout page"),
-        stripe.redirectToCheckout({ sessionId: sessionId.id })
-                // window.location.href = res.data.session.url;
-      })
-      .catch(err => {
-        toast.error(err)
-        console.log(err)
-      })
+      try {
+        userServices.createBooking(values, id)
+            .then(async (res) => {
+                const sessionId = res.data;
+              console.log(sessionId.session.id)
+               
+                toast.success("Redirecting to Checkout page");
+    
+                const stripe = await loadStripe(REACT_APP_STRIPE_PUBLIC_KEY);
+    
+                if (!stripe) {
+                    throw new Error("Failed to load Stripe");
+                }
+    
+                stripe.redirectToCheckout({ sessionId: sessionId.session.id })
+                    .then((result) => {
+                        if (result.error) {
+                           
+                            toast.error(`Stripe Error: ${result.error.message}`);
+                        }
+                    });
+            })
+            .catch((err) => {
+                
+                toast.error(`Booking Error: ${err.message}`);
+                console.error(err);
+            });
     } catch (error) {
-      toast.error(error.message);
+        
+        toast.error(`Unexpected Error: ${error.message}`);
     }
   }}
 

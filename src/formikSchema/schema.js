@@ -12,6 +12,7 @@ export const registerSchema = Yup.object().shape({
     password:Yup.string().min(8,"Minimum 8 params required").matches(passwordRules,"Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character").required("This field is required"),
     userName:Yup.string().min(3,"Minimum 3 params required").required("This field is required"),
 })
+
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 export const bookingSchema = Yup.object().shape({
